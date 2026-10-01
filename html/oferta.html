@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-MUR - Oferta</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                        url('https://images.unsplash.com/photo-1541888946425-d0fbb18f108d?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #f1f5f9;
+            line-height: 1.7;
+        }
+
+        header {
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 4px solid #f59e0b;
+            backdrop-filter: blur(5px);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        nav a {
+            color: #334155;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover, nav a.active {
+            background-color: #f59e0b;
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: rgba(30, 41, 59, 0.85);
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .container h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            border-left: 6px solid #f59e0b;
+            padding-left: 15px;
+        }
+
+        .box {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #f59e0b;
+            border-radius: 8px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .box:hover {
+            transform: translateY(-4px);
+            background: rgba(15, 23, 42, 0.9);
+        }
+        .box h3 {
+            color: #f8fafc;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+        .box p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(15, 23, 42, 0.95);
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NASZE USŁUGI</h1>
+        <p>Solidność i doświadczenie (20 lat w branży)</p>
+    </header>
+
+    <nav>
+        <a href="index.html">O nas</a>
+        <a href="oferta.html" class="active">Oferta</a>
+        <a href="galeria.html">Galeria</a>
+        <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <div class="container">
+        <h2>Zakres naszych usług</h2>
+        
+        <div class="box">
+            <h3>Doradztwo i wycena</h3>
+            <p>Pomagamy w doborze materiałów budowlanych oraz darmowo wyceniamy inwestycje na podstawie projektu lub oględzin.</p>
+        </div>
+
+        <div class="box">
+            <h3>Stan surowy budynków</h3>
+            <p>Wykonujemy fundamenty, mury, stropy oraz więźby dachowe.</p>
+        </div>
+        
+        <div class="box">
+            <h3>Rozbudowy</h3>
+            <p>Powiększanie istniejących budynków, dobudowy pomieszczeń i skrzydeł obiektów.</p>
+        </div>
+
+        <div class="box">
+            <h3>Przebudowy</h3>
+            <p>Modyfikacje układu ścian, modernizacje i dostosowywanie budynków do nowych potrzeb.</p>
+        </div>
+
+        <div class="box">
+            <h3>Usługi minikoparką</h3>
+            <p>Prace ziemne, wykopy pod fundamenty, przyłącza i odwodnienia.</p>
+        </div>
+
+        <div class="box">
+            <h3>Docieplanie poddaszy</h3>
+            <p>Profesjonalna izolacja termiczna i akustyczna dachów oraz poddaszy (wełna mineralna).</p>
+        </div>
+
+        <div class="box">
+            <h3>Papowanie dachów</h3>
+            <p>Kładzenie papy termozgrzewalnej, naprawy i uszczelnianie pokryć dachowych.</p>
+        </div>
+
+        <div class="box">
+            <h3>Usługi ogólnobudowlane</h3>
+            <p>Wszelkie inne prace budowlane i wykończeniowe związane z realizacją inwestycji.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DOM-MUR. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+</body>
+</html>

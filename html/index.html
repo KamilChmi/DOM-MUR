@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM-MUR | Profesjonalne Usługi Budowlane</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-glow: rgba(245, 158, 11, 0.4);
+            --bg-dark: #090d16;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.15) 0%, transparent 40%);
+        }
+
+        /* Nawigacja Glassmorphism */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 30px;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px var(--primary-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        /* Sekcja Hero */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: linear-gradient(rgba(9, 13, 22, 0.75), rgba(9, 13, 22, 0.92)), 
+                        url('https://images.unsplash.com/photo-1541888946425-d0fbb18f108d?auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        header .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 4.5vw, 4.2rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        header h1 span {
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 35px;
+            padding: 0 10px;
+        }
+
+        /* Główne kontenery */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            padding: 0 10px;
+        }
+
+        /* Sekcja O nas */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 35px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .about-card h3 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+        }
+
+        /* Siatka usług */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 35px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Galeria (12 zdjęć) + Lightbox */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 240px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(5, 8, 15, 0.92);
+            backdrop-filter: blur(15px);
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            border: 1px solid var(--border-glass);
+        }
+
+        /* Sekcja Opinii */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 35px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-stars {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .review-author span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* Sekcja Kontakt */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(30, 41, 59, 0.6));
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-box h2 {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            font-size: 1.1rem;
+        }
+
+        .contact-item span {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            word-break: break-all;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.85;
+        }
+
+        /* Stopka */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: rgba(5, 8, 15, 0.5);
+        }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            nav { padding: 12px 20px; }
+            header { padding-top: 120px; }
+            .contact-box { padding: 30px 15px; }
+            .contact-details { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nawigacja -->
+    <nav>
+        <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 72L50 16L98 72" stroke="url(#logo-gradient)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="36" y="50" width="10" height="12" fill="var(--primary)" rx="1"/>
+                <rect x="52" y="50" width="10" height="12" fill="var(--primary)" rx="1"/>
+                <path d="M50 42L74 16L98 44" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="83" y="24" width="9" height="14" fill="var(--primary)" rx="1"/>
+            </svg>
+            <svg width="0" height="0">
+                <defs>
+                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f59e0b" />
+                        <stop offset="100%" stop-color="#d97706" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            DOM<span>-MUR</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#o-nas">O nas</a></li>
+            <li><a href="#oferta">Oferta</a></li>
+            <li><a href="#galeria">Realizacje</a></li>
+            <li><a href="#opinie">Opinie</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Darmowa wycena</a>
+    </nav>
+
+    <!-- Hero -->
+    <header>
+        <div class="hero-content">
+            <h1>Zbudujemy Twój dom<br>tylko województwo Śląskie<span></span></h1>
+            <p>Ponad 20 lat doświadczenia w branży budowlanej, działamy tylko na terenie województwa Śląskiego. Realizujemy stany surowe, przebudowy, rozbudowy oraz roboty ogólnobudowlane. Przejdź niżej, aby zobaczyć zakres naszych usług.</p>
+            <a href="#kontakt" class="cta-btn" style="padding: 14px 32px; font-size: 1rem; display: inline-block;">Skontaktuj się z nami</a>
+        </div>
+    </header>
+
+    <!-- O nas -->
+    <section id="o-nas" class="section">
+        <div class="section-title">
+            <h2>Kim jesteśmy?</h2>
+            <p>Od 20 lat zajmujemy się budową domów jednorodzinnych na terenie Śląska i wszelkich robót z tym związanych</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>WYCENA</h3>
+                <p>Oferujemy darmową wycenę na podstawie projektu lub przy oględzinach</p>
+            </div>
+            <div class="about-card">
+                <h3>BRAK ZALICZEK</h3>
+                <p>Nie bierzemy zaliczek, rozliczamy się dopiero po wykonanym etapie</p>
+            </div>
+            <div class="about-card">
+                <h3>ZAUFANIE</h3>
+                <p>Poprawialiśmy budowy po innych firmach – możesz być pewny, że twoja budowa jest w dobrych rękach</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oferta -->
+    <section id="oferta" class="section" style="background: rgba(255,255,255,0.01);">
+        <div class="section-title">
+            <h2>Zakres naszych usług</h2>
+            <p>Kompleksowe wsparcie na każdym etapie inwestycji</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Doradztwo i wycena</h3>
+                <p>Pomagamy w doborze materiałów budowlanych oraz darmowo wyceniamy inwestycje na podstawie projektu.</p>
+            </div>
+            <div class="service-card">
+                <h3>Stan surowy budynków</h3>
+                <p>Wykonujemy fundamenty, mury, stropy oraz solidne więźby dachowe.</p>
+            </div>
+            <div class="service-card">
+                <h3>Rozbudowy</h3>
+                <p>Powiększanie istniejących budynków, dobudowy pomieszczeń i skrzydeł obiektów.</p>
+            </div>
+            <div class="service-card">
+                <h3>Przebudowy</h3>
+                <p>Modyfikacje układu ścian, modernizacje i dostosowywanie budynków do nowych potrzeb.</p>
+            </div>
+            <div class="service-card">
+                <h3>Usługi minikoparką</h3>
+                <p>Prace ziemne, przyłącza, odwodnienia i pozostałe prace</p>
+            </div>
+            <div class="service-card">
+                <h3>Docieplanie poddaszy</h3>
+                <p>Ocieplanie poddaszy wełną mineralną.</p>
+            </div>
+            <div class="service-card">
+                <h3>Papowanie dachów</h3>
+                <p>Kładzenie papy termozgrzewalnej, naprawy i uszczelnianie pokryć dachowych.</p>
+            </div>
+            <div class="service-card">
+                <h3>Usługi ogólnobudowlane</h3>
+                <p>Wszelkie inne prace budowlane i wykończeniowe związane z realizacją inwestycji.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria (12 zdjęć) -->
+    <section id="galeria" class="section">
+        <div class="section-title">
+            <h2>Nasze Realizacje</h2>
+            <p>Kliknij w dowolne zdjęcie, aby powiększyć podgląd w pełnym ekranie</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie1.jpg" alt="Realizacja 1">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie2.jpg" alt="Realizacja 2">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie3.jpg" alt="Realizacja 3">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie4.jpg" alt="Realizacja 4">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie5.jpg" alt="Realizacja 5">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie6.jpg" alt="Realizacja 6">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie7.jpg" alt="Realizacja 7">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie8.jpg" alt="Realizacja 8">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie9.jpg" alt="Realizacja 9">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie10.jpg" alt="Realizacja 10">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie11.jpg" alt="Realizacja 11">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="zdjecie12.jpg" alt="Realizacja 12">
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Powiększone zdjęcie realizacji">
+    </div>
+
+    <!-- Opinie klientów -->
+    <section id="opinie" class="section" style="background: rgba(255,255,255,0.01);">
+        <div class="section-title">
+            <h2>Opinie naszych klientów</h2>
+            <p>Sprawdź, co mówią osoby, dla których już zrealizowaliśmy inwestycje</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Pan Kazimierz z ekipą postawił nam stan surowy domu jednorodzinnego pod Katowicami. Zero problemów, pełen profesjonalizm i co najważniejsze – brak jakichkolwiek zaliczek przed odbiorem etapu. Polecam z czystym sumieniem!"</p>
+                </div>
+                <div class="review-author">
+                    Tomasz K.
+                    <span>Inwestor, Katowice</span>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Poprawiali dach i robili rozbudowę po poprzedniej firmie, która zostawiła bałagan. Ekipa z DOM-MUR weszła na plac budowy i w krótkim czasie wyprowadziła wszystko na prostą. Solidna śląska robota."</p>
+                </div>
+                <div class="review-author">
+                    Marek W.
+                    <span>Właściciel domu, Gliwice</span>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Bardzo dobre doradztwo techniczne i uczciwe podejście do klienta. Wycena zgodna z rzeczywistością, żadnych ukrytych kosztów. Dom stoi solidnie, a ekipa zna się na rzeczy jak mało kto."</p>
+                </div>
+                <div class="review-author">
+                    Grzegorz S.
+                    <span>Inwestor, Sosnowiec</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" class="section">
+        <div class="contact-box">
+            <h2>Porozmawiajmy o Twojej inwestycji</h2>
+            <p>Zadzwoń do nas lub napisz e-mail – chętnie odpowiemy na pytania i przygotujemy darmową wycenę.</p>
+            
+            <div class="contact-details">
+                <div class="contact-item">
+                    <span>Telefon</span>
+                    <a href="tel:+48503303861">+48 503 303 861</a>
+                </div>
+                <div class="contact-item">
+                    <span>E-mail</span>
+                    <a href="mailto:kazimierz.chmielowski@interia.pl">kazimierz.chmielowski@interia.pl</a>
+                </div>
+            </div>
+
+            <div>
+                <a href="tel:+48503303861" class="cta-btn">Zadzwoń teraz</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <p>&copy; 2026 DOM-MUR. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <!-- Skrypt Lightboxa -->
+    <script>
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            if (img) {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+            }
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
